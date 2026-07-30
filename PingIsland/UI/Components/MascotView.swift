@@ -395,7 +395,8 @@ extension SessionState {
 
 extension MascotStatus {
     init(session: SessionState) {
-        if session.needsManualAttention {
+        let hasRealIntervention = session.intervention != nil || session.phase.isWaitingForApproval
+        if hasRealIntervention {
             self = .warning
         } else if session.phase.isActive {
             self = .working

@@ -48,10 +48,10 @@ extension MascotStatus {
         }
 
         switch representativePhase {
-        case .ended:
-            return .idle
-        case .idle, .processing, .waitingForInput, .waitingForApproval, .compacting:
+        case .processing, .compacting:
             return .working
+        case .idle, .waitingForInput, .waitingForApproval, .ended:
+            return .idle
         }
     }
 }

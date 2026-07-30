@@ -1382,6 +1382,7 @@ struct HookInstaller {
 
         let script = """
         #!/bin/zsh
+        [ -n "$QODERWAKE_HOME" ] && exit 0
         \(environmentExports)
 
         SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
