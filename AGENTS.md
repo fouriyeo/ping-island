@@ -185,3 +185,10 @@ This file is a routing layer for coding agents working in this repo. Keep it sho
 - `Prototype/Tests` remains the fastest place for logic-level unit tests plus process/socket e2e coverage.
 - Sparkle update discovery is expected to use the GitHub Releases `latest/download/appcast.xml` asset unless a local override explicitly replaces it.
 - The worktree may already be dirty. Check `git status` before broad edits.
+- Local dev machines may lack the `Mac Development` signing certificate for team `K46RM9974S`; build with `CODE_SIGN_IDENTITY=-` (ad-hoc) for local testing. Formal Release signing, notarization, App Store, and the `PingIslandUITests` runner still require a valid local identity.
+- SPM resolution of the Sparkle dependency can hang on networks where `git clone https://github.com` is unreliable; a clean DerivedData/SourcePackages forces a re-fetch. A local bare-repo mirror plus a temporary `git config --global url."<local-bare>".insteadOf "https://github.com/sparkle-project/Sparkle"` unblocks it (remember to unset the `insteadOf` afterward). Incremental builds reuse the checked-out package and stay fast.
+- Debug builds emit a thin launcher binary (`Ping Island`) plus the real code in `Ping Island.debug.dylib`; verify embedded strings (e.g. via `strings`/`grep`) against the dylib, not the launcher, or you will wrongly conclude a change did not compile in.
+
+## 项目记忆
+
+决策日志: `docs/iteration-log/` — 查看项目决策时间线（append-only，完整版条目进 README.md，轻量版不进）。
